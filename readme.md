@@ -15,13 +15,13 @@ or whatever it is
 
 To unpack:
 ```
-vivado -mode batch -source transciever.tcl
+vivado -source transceiver.tcl
 ```
 
 to pack:
 File>>Project>>Write Tcl
 
 tick Copy sources to new project
-Name it transciever.tcl
+Name it transceiver.tcl
 
 then make commits and push.
