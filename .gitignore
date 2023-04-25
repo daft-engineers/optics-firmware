@@ -1,0 +1,6 @@
+# Vivado log files
+*.log 
+*.jou
+
+# the unpack folder 
+transceiver/
