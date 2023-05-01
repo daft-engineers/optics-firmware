@@ -31,7 +31,7 @@ entity hamming_encoder is
   );
 end entity hamming_encoder;
 
-architecture behavioral of hamming_encoder is
+architecture Behavioral of hamming_encoder is
   signal code_reg   : std_logic_vector(6 downto 0);
 begin
   process (clk, reset)
