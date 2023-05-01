@@ -27,15 +27,6 @@
 #
 # 3. The following remote source files that were added to the original project:-
 #
-#    "C:/Users/matth/OneDrive - University of Glasgow/5th Year/DST/firmware/optics-firmware/src/sources_1/hello.vhd"
-#    "C:/Users/matth/OneDrive - University of Glasgow/5th Year/DST/firmware/optics-firmware/src/sources_1/HammingEncoder.vhd"
-#    "C:/Users/matth/OneDrive - University of Glasgow/5th Year/DST/firmware/optics-firmware/src/constrs_1/constraints.xdc"
-#    "C:/Users/matth/OneDrive - University of Glasgow/5th Year/DST/firmware/optics-firmware/src/sources_1/Test_HammingEncoder.vhd"
-#    "C:/Users/markh/OneDrive/Documents/Uni/5th Year/DST/optics-firmware/src/sources_1/hello.vhd"
-#    "C:/Users/markh/OneDrive/Documents/Uni/5th Year/DST/optics-firmware/src/sources_1/manc_encoder.vhd"
-#    "C:/Users/markh/OneDrive/Documents/Uni/5th Year/DST/optics-firmware/src/constrs_1/constraints.xdc"
-#    "C:/Users/markh/OneDrive/Documents/Uni/5th Year/DST/optics-firmware/src/sim_1/test_manc_encoder.vhd"
-#
 #*****************************************************************************************
 
 # Check file required for this script exists
@@ -53,11 +44,11 @@ proc checkRequiredFiles { origin_dir} {
 
   set files [list \
  "[file normalize "$origin_dir/src/sources_1/hello.vhd"]"\
- "[file normalize "$origin_dir/src/sources_1/HammingEncoder.vhd"]"\
- "[file normalize "$origin_dir/src/constrs_1/constraints.xdc"]"\
- "[file normalize "$origin_dir/src/sources_1/Test_HammingEncoder.vhd"]"\
+ "[file normalize "$origin_dir/src/sources_1/hamming_encoder.vhd"]"\
+ "[file normalize "$origin_dir/src/constrs_1/Cmod-A7-Master.xdc"]"\
  "[file normalize "$origin_dir/src/sources_1/manc_encoder.vhd"]"\
  "[file normalize "$origin_dir/src/sim_1/test_manc_encoder.vhd"]"\
+ "[file normalize "$origin_dir/src/sim_1/test_hamming_encoder.vhd"]"\
   ]
   foreach ifile $files {
     if { ![file isfile $ifile] } {
@@ -180,7 +171,7 @@ if {[string equal [get_filesets -quiet sources_1] ""]} {
 set obj [get_filesets sources_1]
 set files [list \
  [file normalize "${origin_dir}/src/sources_1/hello.vhd"] \
- [file normalize "${origin_dir}/src/sources_1/HammingEncoder.vhd"] \
+ [file normalize "${origin_dir}/src/sources_1/hamming_encoder.vhd"] \
  [file normalize "${origin_dir}/src/sources_1/manc_encoder.vhd"] \
 ]
 add_files -norecurse -fileset $obj $files
@@ -191,7 +182,7 @@ set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
 
-set file "$origin_dir/src/sources_1/HammingEncoder.vhd"
+set file "$origin_dir/src/sources_1/hamming_encoder.vhd"
 set file "$origin_dir/src/sources_1/manc_encoder.vhd"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
@@ -216,9 +207,9 @@ if {[string equal [get_filesets -quiet constrs_1] ""]} {
 set obj [get_filesets constrs_1]
 
 # Add/Import constrs file and set constrs file properties
-set file "[file normalize "$origin_dir/src/constrs_1/constraints.xdc"]"
+set file "[file normalize "$origin_dir/src/constrs_1/Cmod-A7-Master.xdc"]"
 set file_added [add_files -norecurse -fileset $obj [list $file]]
-set file "$origin_dir/src/constrs_1/constraints.xdc"
+set file "$origin_dir/src/constrs_1/Cmod-A7-Master.xdc"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets constrs_1] [list "*$file"]]
 set_property -name "file_type" -value "XDC" -objects $file_obj
@@ -234,13 +225,13 @@ if {[string equal [get_filesets -quiet sim_1] ""]} {
 # Set 'sim_1' fileset object
 set obj [get_filesets sim_1]
 set files [list \
- [file normalize "${origin_dir}/src/sources_1/Test_HammingEncoder.vhd"] \
+ [file normalize "${origin_dir}/src/sim_1/test_hamming_encoder.vhd"] \
  [file normalize "${origin_dir}/src/sim_1/test_manc_encoder.vhd"] \
 ]
 add_files -norecurse -fileset $obj $files
 
 # Set 'sim_1' fileset file properties for remote files
-set file "$origin_dir/src/sources_1/Test_HammingEncoder.vhd"
+set file "$origin_dir/src/sim_1/test_hamming_encoder.vhd"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sim_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
@@ -257,26 +248,6 @@ set_property -name "top" -value "Test_HammingEncoder" -objects $obj
 set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "xil_defaultlib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "100ns" -objects $obj
-
-# Set 'utils_1' fileset object
-set obj [get_filesets utils_1]
-# Import local files from the original project
-set files [list \
- [file normalize "${origin_dir}/transceiver/transceiver.srcs/utils_1/imports/synth_1/hello.dcp" ]\
-]
-set imported_files [import_files -fileset utils_1 $files]
-
-# Set 'utils_1' fileset file properties for remote files
-# None
-
-# Set 'utils_1' fileset file properties for local files
-set file "synth_1/hello.dcp"
-set file_obj [get_files -of_objects [get_filesets utils_1] [list "*$file"]]
-set_property -name "netlist_only" -value "0" -objects $file_obj
-
-
-# Set 'utils_1' fileset properties
-set obj [get_filesets utils_1]
 
 set idrFlowPropertiesConstraints ""
 catch {
