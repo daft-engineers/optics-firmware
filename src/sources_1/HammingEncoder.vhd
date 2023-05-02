@@ -51,7 +51,7 @@ begin
           when "0100" =>
             code_reg <= "0100101";
           when "0101" =>
-            code_reg <= "0101010";
+            code_reg <= "0101110";
           when "0110" =>
             code_reg <= "0110110";
           when "0111" =>
