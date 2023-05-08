@@ -151,6 +151,8 @@ Encoder : entity work.serial2parallel
     data_ready <= '0';
     stimulus <= '0';
     
+    assert( output = "01111111111111") report "test failed for stimulus = 0111111111111" severity error;
+    
     wait for 5ns;   
     clk <= '0';
     wait for 2ns;
@@ -237,6 +239,8 @@ Encoder : entity work.serial2parallel
     
     data_ready <= '1';
     wait for 5ns;
+    
+    assert( output = "01001110100011") report "test failed for stimulus = 01001110100011" severity error;
     
     wait;
     
