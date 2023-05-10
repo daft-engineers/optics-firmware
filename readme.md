@@ -21,7 +21,7 @@ to pack:
 File>>Project>>Write Tcl
 
 tick Copy sources to new project
-Name it transceiver.tcl
+Name it transceiver.tcl and make sure it's in the root of the project, overwriting the old one. 
 
 then make commits and push.
 
