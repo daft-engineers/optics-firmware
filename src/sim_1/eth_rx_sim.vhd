@@ -61,6 +61,7 @@ clk_in <= not clk_in after half_period;
 process
 begin
 wait for 1000ns;
+rst <= '0';
 wait for 10ns;
 data <= "1010";
 wait for period;
@@ -100,7 +101,7 @@ assert (rx_good = '0') report "Test failed as rx_good is high too late" severity
 wait for period;
 data <= "0001";
 wait for period;
-
+wait for 30ns;
 
 
 end process;

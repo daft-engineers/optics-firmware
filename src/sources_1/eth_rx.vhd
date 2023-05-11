@@ -49,7 +49,10 @@ begin
 type_sm:
 process (RX_CLK, rst)
 begin
-if rising_edge(RX_CLK) then
+if (rst = '1') then 
+    statep <= waiting;
+    RX_GOOD <= '0';
+elsif rising_edge(RX_CLK) then
     if statep = waiting then
         if RX_DV = '1' then
             statep <= delim1;
@@ -65,9 +68,6 @@ if rising_edge(RX_CLK) then
             RX_GOOD <= '0';
         end if;
     end if;
-elsif (rst = '0') then 
-    statep <= waiting;
-    RX_GOOD <= '0';
 end if; 
 end process;
 end Behavioral;
