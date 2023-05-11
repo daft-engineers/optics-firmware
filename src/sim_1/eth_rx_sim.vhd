@@ -39,6 +39,7 @@ architecture Behavioral of eth_rx_sim is
 
 signal clk_in, dv_in : std_logic:= '0';
 signal rst : std_logic := '1';
+signal rx_good : std_logic;
 signal data : std_logic_vector(3 downto 0) := "0000";
 constant period : time := 40ns;
 constant half_period : time := 20ns;
@@ -50,7 +51,8 @@ eth_rx_test : entity work.eth_rx
         RX_CLK => clk_in, 
         RXD => data,
         RX_DV => dv_in,
-        rst => rst
+        rst => rst,
+        RX_GOOD => rx_good
     );
     
 
@@ -70,8 +72,10 @@ wait for period;
 data <= "0110";
 wait for period;
 data <= "0010";
+assert (rx_good = '0') report "Test failed as rx_good is high too early" severity error;
 wait for period;
 data <= "0011";
+assert (rx_good = '1') report "Test failed as rx_good is low too late" severity error;
 wait for period;
 data <= "0100";
 wait for period;
@@ -89,8 +93,10 @@ data <= "1010";
 wait for period;
 dv_in <= '0';
 data <= "1011";
+assert (rx_good = '1') report "Test failed as rx_good is low too early" severity error;
 wait for period;
 data <= "1100";
+assert (rx_good = '0') report "Test failed as rx_good is high too late" severity error;
 wait for period;
 data <= "0001";
 wait for period;
