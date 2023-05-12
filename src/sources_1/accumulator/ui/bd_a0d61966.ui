@@ -1,0 +1,31 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"1.0",
+   "Default View_TopLeft":"-1109,-642",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.0r6  2020-01-29 bk=1.5227 VDI=41 GEI=36 GUI=JA:10.0 non-TLS
+#  -string -flagsOSRD
+preplace port port-id_rd_en_0 -pg 1 -lvl 0 -x -370 -y -240 -defaultsOSRD
+preplace port port-id_srst_0 -pg 1 -lvl 0 -x -370 -y -190 -defaultsOSRD
+preplace port port-id_wr_en_0 -pg 1 -lvl 0 -x -370 -y -310 -defaultsOSRD
+preplace port port-id_empty_0 -pg 1 -lvl 2 -x 10 -y -270 -defaultsOSRD
+preplace port port-id_clk_0 -pg 1 -lvl 0 -x -370 -y -60 -defaultsOSRD
+preplace portBus din_0 -pg 1 -lvl 0 -x -370 -y -330 -defaultsOSRD
+preplace portBus dout_0 -pg 1 -lvl 2 -x 10 -y -250 -defaultsOSRD
+preplace inst fifo_generator_0 -pg 1 -lvl 1 -x -170 -y -280 -defaultsOSRD
+preplace inst clk_wiz -pg 1 -lvl 1 -x -170 -y -70 -defaultsOSRD
+preplace netloc din_0_1 1 0 1 -350 -340n
+preplace netloc fifo_generator_0_dout 1 0 2 -330 -140 -20J
+preplace netloc fifo_generator_0_empty 1 0 2 -330 -420 -20J
+preplace netloc rd_en_0_1 1 0 1 -350 -240n
+preplace netloc srst_0_1 1 0 1 -340 -200n
+preplace netloc wr_en_0_1 1 0 1 -350 -320n
+preplace netloc clk_wiz_clk_out1 1 0 2 -320 0 -20
+preplace netloc clk_0_1 1 0 1 N -60
+levelinfo -pg 1 -370 -170 10
+pagesize -pg 1 -db -bbox -sgen -490 -430 130 180
+"
+}
+{
+   "da_clkrst_cnt":"2"
+}
