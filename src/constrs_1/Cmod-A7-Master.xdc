@@ -3,6 +3,13 @@
 ## - uncomment the lines corresponding to used pins
 ## - rename the used ports (in each line, after get_ports) according to the top level signal names in the project
 
+## this is needed to make it implement due to the following error:
+##[Place 30-876] Port 'RXCLK'  is assigned to PACKAGE_PIN 'B15'  which can only be used as the N side of a differential clock input. 
+##Please use the following constraint(s) to pass this DRC check:
+#set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets {RXCLK_IBUF}]
+
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets {RXCLK_IBUF}]
+
 ## 12 MHz Clock Signal
 #set_property -dict { PACKAGE_PIN L17   IOSTANDARD LVCMOS33 } [get_ports { sysclk }]; #IO_L12P_T1_MRCC_14 Sch=gclk
 #create_clock -add -name sys_clk_pin -period 83.33 -waveform {0 41.66} [get_ports {sysclk}];
@@ -18,7 +25,7 @@ set_property -dict { PACKAGE_PIN A17   IOSTANDARD LVCMOS33 } [get_ports { LOUT }
 
 ## Buttons
 #set_property -dict { PACKAGE_PIN A18   IOSTANDARD LVCMOS33 } [get_ports { btn[0] }]; #IO_L19N_T3_VREF_16 Sch=btn[0]
-#set_property -dict { PACKAGE_PIN B18   IOSTANDARD LVCMOS33 } [get_ports { btn[1] }]; #IO_L19P_T3_16 Sch=btn[1]
+set_property -dict { PACKAGE_PIN B18   IOSTANDARD LVCMOS33 } [get_ports { rst }]; #IO_L19P_T3_16 Sch=btn[1]
 
 ## Pmod Header JA
 #set_property -dict { PACKAGE_PIN G17   IOSTANDARD LVCMOS33 } [get_ports { ja[0] }]; #IO_L5N_T0_D07_14 Sch=ja[1]

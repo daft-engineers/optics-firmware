@@ -20,12 +20,14 @@ o_data          <= r_data(0);
 
 process(i_clk_slow,i_clk_fast)
 begin
+if rising_edge(i_clk_fast) then
+    
+    r_data <= shift_right(r_data, 1);
+end if;
 
 if rising_edge(i_clk_slow) then
     r_data <= unsigned(i_data);
-elsif rising_edge(i_clk_fast) then
-    
-    r_data <= shift_right(r_data, 1);
+
     
 end if;
 end process;
