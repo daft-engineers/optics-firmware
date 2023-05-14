@@ -13,9 +13,9 @@ port (
   );
 end parallel2serial;
 
-architecture Behavioral of parallel2serial is
+architecture rtl of parallel2serial is
 signal r_data                         : std_logic_vector(13 downto 0);
-signal r_data_new                        : std_logic_vector(13 downto 0);
+signal slow_last : std_logic := '0';
 
 begin
 
@@ -34,21 +34,31 @@ begin
 --    counter <= counter + 1;
 --end if;
 
-process(i_clk_slow,i_clk_fast)
-begin
+--process(i_clk_slow)
+--begin
 
+
+--if rising_edge(i_clk_slow) then
+--        r_data <= i_data;
+    
+--end if;
+
+
+--end process;
+process(i_clk_fast)
+begin
 if rising_edge(i_clk_fast) then
     r_data <= '0' & r_data ( 13 downto 1);
-    o_data          <= r_data(0);
-    
-end if;
-if rising_edge(i_clk_slow) then
+    o_data <= r_data(0);
+    slow_last <= i_clk_slow;
+    if slow_last = '0' and i_clk_slow = '1' then
         r_data <= i_data;
+    end if;
+    
+
 end if;
-
-
 end process;
 
 o_array <= r_data;
 
-end Behavioral;
+end rtl;

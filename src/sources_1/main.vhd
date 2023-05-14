@@ -35,7 +35,7 @@ entity main is
 Port (
     RXCLK, RXDV, RXER, rst: in std_logic;
     RXD : in std_logic_vector(3 downto 0);
-    LOUT : out std_logic;
+    TXN, TXP : out std_logic;
     sysclk : in std_logic
     );
 end main;
@@ -138,6 +138,7 @@ ILA : entity work.LALALA_wrapper
         reset_0 => rst
         );
         
-LOUT <= iout;
+TXP <= iout;
+TXN <= not iout;
 
 end Behavioral;
