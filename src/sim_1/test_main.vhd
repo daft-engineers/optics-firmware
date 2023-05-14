@@ -37,7 +37,7 @@ end test_main;
 
 architecture Behavioral of test_main is
 
-signal clk_in, dv_in : std_logic:= '0';
+signal clk_in, dv_in, rx_er, sysclk : std_logic:= '0';
 signal rst : std_logic := '1';
 signal output : std_logic;
 signal data : std_logic_vector(3 downto 0) := "0000";
@@ -50,9 +50,11 @@ main_test : entity work.main
     port map (
         RXCLK => clk_in, 
         RXD => data,
+        RXER => rx_er,
         RXDV => dv_in,
         rst => rst,
-        LOUT => output
+        LOUT => output,
+        sysclk => sysclk
     );
     
 

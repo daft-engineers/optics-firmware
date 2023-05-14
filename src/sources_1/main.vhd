@@ -33,9 +33,10 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity main is
 Port (
-    RXCLK, RXDV, rst: in std_logic;
+    RXCLK, RXDV, RXER, rst: in std_logic;
     RXD : in std_logic_vector(3 downto 0);
-    LOUT : out std_logic
+    LOUT : out std_logic;
+    sysclk : in std_logic
     );
 end main;
 
@@ -44,6 +45,8 @@ signal RX_GOOD, empty, rd_en : std_logic;
 signal bus1 : std_logic_vector (3 downto 0);
 signal bus2 : std_logic_vector (6 downto 0);
 signal bus3 : std_logic_vector (13 downto 0);
+signal bus4 : std_logic_vector (13 downto 0);
+signal iout : std_logic;
 signal slow_clock : std_logic := '0';
 signal slow_slow_clock : std_logic := '0';
 signal not_slow_slow_clock : std_logic;
@@ -115,9 +118,26 @@ manc_Encoder : entity work.manc_encoder
 p2s : entity work.parallel2serial
     port map (
         i_data => bus3,
-        o_data => LOUT,
+        o_data => iout,
         i_clk_slow => slow_slow_clock,
-        i_clk_fast => slow_clock
+        i_clk_fast => slow_clock,
+        o_array => bus4
     );
+    
+ILA : entity work.LALALA_wrapper
+    port map (
+        clk_0 => sysclk,
+        probe0_0(0) => slow_slow_clock,
+        probe1_0(0) => RXDV,
+        probe2_0(0) => slow_clock,
+        probe3_0 => RXD,
+        probe4_0 => bus1,
+        probe5_0 => bus2,
+        probe6_0 => bus4,
+        probe7_0(0) => iout,
+        reset_0 => rst
+        );
+        
+LOUT <= iout;
 
 end Behavioral;
